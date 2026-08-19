@@ -55,3 +55,18 @@
     font-size: 2.75rem;
   }
 }
+
+/* Dark variant — author as "Banner (dark)" in the doc */
+.banner.dark .banner-wrapper {
+  background-color: #0b1f3a; /* dark navy instead of default blue */
+}
+
+.banner.dark .banner-image picture,
+.banner.dark .banner-image img {
+  opacity: 0.5; /* slightly more visible against the darker background */
+}
+
+.banner.dark .banner-title h2 {
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 50%);
+}
