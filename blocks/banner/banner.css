@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: center;
   min-height: 240px;
-  background-color: #1473e6; /* <-- default blue, change this to restyle */
+  background-color: #87ceeb; /* <-- default blue, change this to restyle */
   color: #ffffff;
 }
 
@@ -58,7 +58,7 @@
 
 /* Dark variant — author as "Banner (dark)" in the doc */
 .banner.dark .banner-wrapper {
-  background-color: #0b1f3a; /* dark navy instead of default blue */
+  background-color: #1473e6; /* dark navy instead of default blue */
 }
 
 .banner.dark .banner-image picture,
