@@ -1,5 +1,5 @@
-function decorateBanner(el) {
-  const rows = el.querySelectorAll(':scope > div');
+export default function decorate(block) {
+  const rows = block.querySelectorAll(':scope > div');
   const [titleRow, imageRow] = rows;
 
   // Add a class to the title row and promote its text to a heading
@@ -14,8 +14,3 @@ function decorateBanner(el) {
   // Add a class to the image row
   imageRow.classList.add('banner-image');
 }
-
-const els = document.querySelectorAll('.banner');
-els.forEach((el) => {
-  decorateBanner(el);
-});
