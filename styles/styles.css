@@ -328,3 +328,8 @@ main .section.highlight {
 a:hover {
   color: red;
 }
+
+
+.grey-background {
+  background-color: #6b7280;
+}
