@@ -10,6 +10,7 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  getMetadata,
 } from './aem.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -50,6 +51,18 @@ async function loadFonts() {
 }
 
 /**
+ * Builds a breadcrumb block and prepends it to main, if enabled via metadata.
+ * @param {Element} main The container element
+ */
+function buildBreadcrumbBlock(main) {
+  const showBreadcrumb = getMetadata('breadcrumb');
+  if (showBreadcrumb === 'true' && !main.querySelector('.breadcrumb')) {
+    const breadcrumbBlock = buildBlock('breadcrumb', '');
+    main.prepend(breadcrumbBlock);
+  }
+}
+
+/**
  * Turns `/widgets/...` links into widget blocks.
  * @param {Element} main The container element
  */
@@ -79,6 +92,8 @@ function buildWidgetAutoBlocks(main) {
  */
 function buildAutoBlocks(main) {
   try {
+   buildBreadcrumbBlock(main);
+
     // auto load `*/fragments/*` references
     const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')].filter((f) => !f.closest('.fragment'));
     if (fragments.length > 0) {
