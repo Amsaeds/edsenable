@@ -58,7 +58,11 @@ function buildBreadcrumbBlock(main) {
   const showBreadcrumb = getMetadata('breadcrumb');
   if (showBreadcrumb === 'true' && !main.querySelector('.breadcrumb')) {
     const breadcrumbBlock = buildBlock('breadcrumb', '');
-    main.prepend(breadcrumbBlock);
+    const section = document.createElement('div');
+    const wrapper = document.createElement('div');
+    wrapper.append(breadcrumbBlock);
+    section.append(wrapper);
+    main.prepend(section);
   }
 }
 
