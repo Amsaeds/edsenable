@@ -1,5 +1,5 @@
 
-nav.breadcrumb {
+breadcrumb {
     grid-area: bread;
     display: inline-block;
     list-style: none;
