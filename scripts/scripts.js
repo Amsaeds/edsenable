@@ -56,7 +56,7 @@ async function loadFonts() {
  */
 function buildBreadcrumbBlock(main) {
   const showBreadcrumb = getMetadata('breadcrumb');
-  if (showBreadcrumb === 'true' && !main.querySelector('.breadcrumb')) {
+  if (showBreadcrumb === 'true' && !document.querySelector('.breadcrumb')) {
     const breadcrumbBlock = buildBlock('breadcrumb', '');
     const section = document.createElement('div');
     const wrapper = document.createElement('div');
