@@ -2,12 +2,13 @@ import { getLanguage } from './scripts.js';
 
 const LANGUAGES = new Set(['en', 'fr']);
 
-// Get page path without language prefix
+// Get page path without language prefix, always WITHOUT a leading slash
 function getPagePathWithoutLanguage() {
   const segments = window.location.pathname.split('/');
-  return segments.length > 1 && LANGUAGES.has(segments[1])
-    ? (segments.slice(2).join('/') || '/')
-    : window.location.pathname;
+  const path = segments.length > 1 && LANGUAGES.has(segments[1])
+    ? segments.slice(2).join('/')
+    : segments.slice(1).join('/');
+  return path; // e.g. "banner", "banniere", or "" for homepage
 }
 
 // Fetch language mappings
@@ -30,17 +31,16 @@ async function fetchLanguageMappings() {
 async function findMappedUrl(targetLang) {
   const mappings = await fetchLanguageMappings();
   const currentLang = getLanguage();
-  const currentPath = getPagePathWithoutLanguage();
-  const normalizedPath = currentPath === '/' ? '' : currentPath;
+  const normalizedPath = getPagePathWithoutLanguage(); // already has no leading slash
 
   const mapping = mappings.find((item) => {
     const url = item[currentLang];
-    if (!url) return false;
+    if (url === undefined || url === null) return false;
     const normalized = url.startsWith('/') ? url.slice(1) : url;
-    return (normalized || '') === normalizedPath;
+    return normalized === normalizedPath;
   });
 
-  return mapping?.[targetLang] || currentPath;
+  return mapping?.[targetLang] ?? normalizedPath;
 }
 
 // Switch to target language
@@ -49,23 +49,23 @@ export async function switchToLanguage(targetLang) {
 
   try {
     const mappedUrl = await findMappedUrl(targetLang);
+    const cleanUrl = mappedUrl && mappedUrl.startsWith('/') ? mappedUrl.slice(1) : mappedUrl;
 
     // Homepage: / <-> /fr
-    if (!mappedUrl || mappedUrl === '/') {
+    if (!cleanUrl) {
       window.location.href = targetLang === 'fr' ? '/fr' : '/';
       return;
     }
 
-    // Other pages: standard pattern
-    const cleanUrl = mappedUrl.startsWith('/') ? mappedUrl : `/${mappedUrl}`;
-    window.location.href = `/${targetLang}${cleanUrl}`;
+    // English lives at root, no prefix. Other languages get a prefix.
+    window.location.href = targetLang === 'en' ? `/${cleanUrl}` : `/${targetLang}/${cleanUrl}`;
   } catch {
     // Fallback
     const currentPath = getPagePathWithoutLanguage();
-    if (currentPath === '/') {
+    if (!currentPath) {
       window.location.href = targetLang === 'fr' ? '/fr' : '/';
     } else {
-      window.location.href = `/${targetLang}${currentPath}`;
+      window.location.href = targetLang === 'en' ? `/${currentPath}` : `/${targetLang}/${currentPath}`;
     }
   }
 }
