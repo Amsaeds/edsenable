@@ -50,18 +50,12 @@ async function loadFonts() {
   }
 }
 
-/**
- * Builds a breadcrumb block and prepends it to main, if enabled via metadata.
- * @param {Element} main The container element
- */
 function buildBreadcrumbBlock(main) {
   const showBreadcrumb = getMetadata('breadcrumb');
   if (showBreadcrumb === 'true' && !document.querySelector('.breadcrumb')) {
     const breadcrumbBlock = buildBlock('breadcrumb', '');
     const section = document.createElement('div');
-    const wrapper = document.createElement('div');
-    wrapper.append(breadcrumbBlock);
-    section.append(wrapper);
+    section.append(breadcrumbBlock);
     main.prepend(section);
   }
 }
