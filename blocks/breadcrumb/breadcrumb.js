@@ -9,7 +9,7 @@ export default function decorate($block) {
   const $ul = document.createElement('ul');
   $block.append($ul);
   const trail = [{
-    text: 'Adventures',
+    text: 'Home',
     link: '/adventures',
   }, {
     text: title,
