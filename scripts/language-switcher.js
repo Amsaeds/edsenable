@@ -51,9 +51,9 @@ export async function switchToLanguage(targetLang) {
     const mappedUrl = await findMappedUrl(targetLang);
     const cleanUrl = mappedUrl && mappedUrl.startsWith('/') ? mappedUrl.slice(1) : mappedUrl;
 
-    // Homepage: / <-> /fr
+    // Homepage: / <-> /fr/
     if (!cleanUrl) {
-      window.location.href = targetLang === 'fr' ? '/fr' : '/';
+      window.location.href = targetLang === 'fr' ? '/fr/' : '/';
       return;
     }
 
@@ -63,7 +63,7 @@ export async function switchToLanguage(targetLang) {
     // Fallback
     const currentPath = getPagePathWithoutLanguage();
     if (!currentPath) {
-      window.location.href = targetLang === 'fr' ? '/fr' : '/';
+      window.location.href = targetLang === 'fr' ? '/fr/' : '/';
     } else {
       window.location.href = targetLang === 'en' ? `/${currentPath}` : `/${targetLang}/${currentPath}`;
     }
