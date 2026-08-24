@@ -13,6 +13,9 @@ import {
   getMetadata,
 } from './aem.js';
 
+const LANGUAGES = new Set(['en', 'fr']);
+let language;
+
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
     createHTML: (s) => s, // avoid stack overflow
