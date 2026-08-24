@@ -1,5 +1,7 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { getLanguage } from '../../scripts/scripts.js';
+import { switchLanguage } from '../../scripts/language-switcher.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -115,7 +117,9 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 export default async function decorate(block) {
   // load nav as fragment
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+   const currentLang = getLanguage();
+    const defaultNavPath = currentLang === 'fr' ? '/fr/nav' : '/nav';
+  const navPath = navMeta ? new URL(navMeta, window.location).pathname : defaultNavPath;
   const fragment = await loadFragment(navPath);
 
   // decorate nav DOM
@@ -150,6 +154,16 @@ export default async function decorate(block) {
       });
     });
   }
+
+   // Initialize language switcher
+    const languageSwitcher = nav.querySelector('.nav-tools .default-content-wrapper > p');
+    if (languageSwitcher) {
+      languageSwitcher.style.cursor = 'pointer';
+      languageSwitcher.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchLanguage();
+      });
+    }
 
   // hamburger for mobile
   const hamburger = document.createElement('div');

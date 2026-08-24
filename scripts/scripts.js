@@ -84,6 +84,32 @@ function buildWidgetAutoBlocks(main) {
   });
 }
 
+export function getLanguageFromPath(pathname, resetCache = false) {
+  if (resetCache) {
+    language = undefined;
+  }
+
+  if (language !== undefined) return language;
+
+  const segs = pathname.split('/');
+  if (segs.length > 1) {
+    const l = segs[1];
+    if (LANGUAGES.has(l)) {
+      language = l;
+    }
+  }
+
+  if (language === undefined) {
+    language = 'en'; // default to English
+  }
+
+  return language;
+}
+
+export function getLanguage(curPath = window.location.pathname, resetCache = false) {
+  return getLanguageFromPath(curPath, resetCache);
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
