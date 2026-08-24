@@ -10,7 +10,7 @@ export default function decorate($block) {
   $block.append($ul);
   const trail = [{
     text: 'Home',
-    link: '/adventures',
+    link: '/',
   }, {
     text: title,
   }];
