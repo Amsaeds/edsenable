@@ -11,10 +11,14 @@ import {
   loadCSS,
   buildBlock,
   getMetadata,
+  toCamelCase,
 } from './aem.js';
+
+import { fetchPlaceholders } from './placeholders.js';
 
 const LANGUAGES = new Set(['en', 'fr']);
 let language;
+
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -113,6 +117,28 @@ export function getLanguage(curPath = window.location.pathname, resetCache = fal
   return getLanguageFromPath(curPath, resetCache);
 }
 
+export function getPlaceholdersPrefix() {
+  const lang = getLanguage();
+  return lang === 'en' ? 'default' : lang;
+}
+
+
+
+function replacePlaceholderTokens(root, placeholders) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  let node = walker.nextNode();
+  while (node) {
+    if (node.textContent.includes('{{')) textNodes.push(node);
+    node = walker.nextNode();
+  }
+  textNodes.forEach((textNode) => {
+    textNode.textContent = textNode.textContent.replace(/{{\s*([\w-]+)\s*}}/g, (match, key) => {
+      const value = placeholders[toCamelCase(key)];
+      return value !== undefined ? value : match;
+    });
+  });
+}
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -202,11 +228,13 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+document.documentElement.lang = getLanguage();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+     const placeholders = await fetchPlaceholders(getPlaceholdersPrefix());
+        replacePlaceholderTokens(main, placeholders);
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
