@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta
     http-equiv="Content-Security-Policy"
@@ -37,37 +36,254 @@
   </script>
   <link rel="stylesheet" href="/styles/styles.css">
   <style>
+    :root {
+      --error-bg: #14171a;
+      --error-ink: #f4f2ed;
+      --error-ink-dim: #a7ac9a;
+      --error-accent: #e3b341;
+      --error-line: #363b3a;
+      --error-serif: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+      --error-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'Roboto Mono', monospace;
+    }
+
     main.error {
       min-height: calc(100vh - var(--nav-height));
       display: flex;
       align-items: center;
+      background: var(--error-bg);
+      color: var(--error-ink);
+      overflow: hidden;
+      position: relative;
     }
 
-    main.error .error-number {
+    main.error .section {
       width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
-    main.error .error-number text {
-      font-family: monospace;
+    /* compass watermark, purely decorative */
+    main.error .compass {
+      position: absolute;
+      top: 50%;
+      left: -6%;
+      width: 620px;
+      height: 620px;
+      transform: translateY(-50%);
+      opacity: 0.05;
+      pointer-events: none;
+      animation: error-compass-spin 90s linear infinite;
+    }
+
+    @keyframes error-compass-spin {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    main.error .trail-figure {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    main.error .trail-path {
+      stroke: var(--error-accent);
+      stroke-width: 2.5;
+      stroke-dasharray: 10 8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-dashoffset: 620;
+      animation: error-draw 2.4s ease-out forwards;
+    }
+
+    main.error .trail-dot {
+      fill: var(--error-accent);
+      opacity: 0;
+      animation: error-fade-in 0.6s ease-out forwards;
+      animation-delay: 2.2s;
+    }
+
+    main.error .trail-post,
+    main.error .trail-sign {
+      stroke: var(--error-ink-dim);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    main.error .trail-sign-fill {
+      fill: var(--error-bg);
+      stroke: var(--error-ink-dim);
+      stroke-width: 2;
+    }
+
+    main.error .trail-number {
+      font-family: var(--error-serif);
+      font-size: 1.6rem;
+      fill: var(--error-ink);
+    }
+
+    @keyframes error-draw {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes error-fade-in {
+      to { opacity: 1; }
+    }
+
+    main.error .error-copy {
+      max-width: 30rem;
+    }
+
+    main.error .error-eyebrow {
+      font-family: var(--error-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--error-accent);
+      margin: 0 0 1rem;
+    }
+
+    main.error .error-message {
+      font-family: var(--error-serif);
+      font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+      line-height: 1.2;
+      margin: 0 0 0.9rem;
+      color: var(--error-ink);
+    }
+
+    main.error .error-subtext {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--error-ink-dim);
+      margin: 0 0 2rem;
+    }
+
+    main.error .error-subtext code {
+      font-family: var(--error-mono);
+      font-size: 0.85em;
+      color: var(--error-ink);
+      background: var(--error-line);
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+    }
+
+    main.error .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 0;
+    }
+
+    main.error .button {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--error-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      padding: 0.7rem 1.3rem;
+      border-radius: 4px;
+      transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    main.error .error-button-home {
+      background: var(--error-accent);
+      color: #1b1706;
+      border: 1px solid var(--error-accent);
+    }
+
+    main.error .error-button-home:hover {
+      transform: translateY(-1px);
+      background: #f0c159;
+    }
+
+    main.error .error-button-back {
+      background: transparent;
+      color: var(--error-ink);
+      border: 1px solid var(--error-line);
+    }
+
+    main.error .error-button-back:hover {
+      transform: translateY(-1px);
+      border-color: var(--error-ink-dim);
+    }
+
+    @media (max-width: 900px) {
+      main.error .section {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 3.5rem 1.5rem;
+        text-align: left;
+      }
+
+      main.error .trail-figure {
+        max-width: 280px;
+        order: -1;
+      }
+
+      main.error .compass {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      main.error .trail-path,
+      main.error .trail-dot,
+      main.error .compass {
+        animation: none;
+        stroke-dashoffset: 0;
+        opacity: 1;
+      }
     }
   </style>
   <link rel="stylesheet" href="/styles/lazy-styles.css">
 </head>
-
 <body>
   <header></header>
   <main class="error">
+    <svg class="compass" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+      <circle cx="100" cy="100" r="96" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="1"/>
+      <path d="M100 4 L106 40 L100 30 L94 40 Z" fill="currentColor"/>
+      <path d="M100 196 L106 160 L100 170 L94 160 Z" fill="currentColor"/>
+      <path d="M4 100 L40 94 L30 100 L40 106 Z" fill="currentColor"/>
+      <path d="M196 100 L160 94 L170 100 L160 106 Z" fill="currentColor"/>
+    </svg>
+
     <div class="section">
-      <svg viewBox="1 0 38 18" class="error-number">
-        <text x="0" y="17">404</text>
+      <svg class="trail-figure" viewBox="0 0 320 260" aria-hidden="true" focusable="false">
+        <path class="trail-path" d="M10 40 C 60 20, 90 70, 60 110 S 130 170, 110 210 C 100 225, 130 235, 150 228" />
+        <circle class="trail-dot" cx="10" cy="40" r="4" />
+        <circle class="trail-dot" cx="60" cy="110" r="4" style="animation-delay: 1.9s" />
+        <circle class="trail-dot" cx="110" cy="210" r="4" style="animation-delay: 2.1s" />
+
+        <line class="trail-post" x1="215" y1="90" x2="215" y2="235" />
+        <path class="trail-post" d="M205 235 L225 235" />
+        <g transform="rotate(-4 215 110)">
+          <rect class="trail-sign-fill" x="150" y="82" width="130" height="56" rx="3" />
+          <text class="trail-number" x="170" y="120">404</text>
+        </g>
       </svg>
-      <h2 class="error-message">Page Not Found Test Page</h2>
-      <p class="button-container">
-        <a href="/" class="button secondary error-button-home">Go home</a>
-      </p>
+
+      <div class="error-copy">
+        <p class="error-eyebrow">Lost route</p>
+        <h2 class="error-message">This page wandered off the map.</h2>
+        <p class="error-subtext">
+          The link you followed doesn't lead anywhere &mdash; it may have moved, been renamed,
+          or never existed. Double-check the address, or head back to solid ground.
+        </p>
+        <p class="button-container">
+          <a href="/" class="button error-button-home">Go home</a>
+        </p>
+      </div>
     </div>
   </main>
   <footer></footer>
 </body>
-
 </html>
