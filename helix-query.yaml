@@ -22,3 +22,8 @@ indices:
       image:
         select: head > meta[property="og:image"]
         value: attribute(el, "content")
+      twittertags:
+        select: head > meta[name="twitter:tags"]
+        value: attribute(el, "content")    
+
+        
