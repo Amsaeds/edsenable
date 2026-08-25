@@ -119,9 +119,8 @@ export function getLanguage(curPath = window.location.pathname, resetCache = fal
 
 export function getPlaceholdersPrefix() {
   const lang = getLanguage();
-  return lang === 'en' ? 'default' : lang;
+  return lang === 'en' ? 'default' : `/${lang}`;
 }
-
 
 
 function replacePlaceholderTokens(root, placeholders) {
@@ -234,6 +233,7 @@ document.documentElement.lang = getLanguage();
   if (main) {
     decorateMain(main);
      const placeholders = await fetchPlaceholders(getPlaceholdersPrefix());
+     console.log(placeholders);
         replacePlaceholderTokens(main, placeholders);
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
