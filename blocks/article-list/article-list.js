@@ -160,7 +160,7 @@ export default async function decorate(block) {
   }
 
   const ul = document.createElement('ul');
-  ul.className = 'article-list';
+  ul.className = 'article-list-grid';
   entries.forEach((entry) => ul.append(buildCard(entry)));
   block.append(ul);
 }

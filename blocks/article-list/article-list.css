@@ -1,17 +1,28 @@
+/* the block wrapper itself gets a class matching the block name (article-list) —
+   force it to full width so the grid inside isn't constrained by a narrower
+   default section/content max-width */
+.article-list.block {
+  width: 100%;
+  max-width: 100%;
+}
+
 .article-list-loading {
   min-height: 12rem;
 }
 
-.article-list {
+/* named article-list-grid (not article-list) so this never collides with the
+   block wrapper's own class and gets overridden by a generic .block rule */
+.article-list-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
-.article-list-card {
+.article-list-grid .article-list-card {
   border: 1px solid var(--border-color, #e4e4e4);
   border-radius: 8px;
   overflow: hidden;
@@ -80,7 +91,7 @@
 }
 
 @media (max-width: 600px) {
-  .article-list {
+  .article-list-grid {
     grid-template-columns: 1fr;
   }
 }
