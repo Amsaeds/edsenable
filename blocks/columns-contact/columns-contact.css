@@ -1,0 +1,55 @@
+.columns-contact > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-contact img {
+  width: 100%;
+}
+
+.columns-contact > div > div {
+  order: 1;
+}
+
+.columns-contact > div > .columns-contact-img-col {
+  order: 0;
+}
+
+.columns-contact > div > .columns-contact-img-col img {
+  display: block;
+}
+
+/* contact detail eyebrow labels (Email / Phone / Address) — small uppercase grey,
+   not the global large h3. */
+.columns-contact h3 {
+  margin: 16px 0 4px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #999;
+}
+
+/* contact links (mailto:/tel:) — dark, matching source */
+.columns-contact a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.columns-contact a:hover {
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  .columns-contact > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 24px;
+  }
+
+  .columns-contact > div > div {
+    flex: 1;
+    order: unset;
+  }
+}
