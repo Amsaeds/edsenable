@@ -13,7 +13,7 @@
   justify-content: center;
   min-height: 240px;
   background-color: #87ceeb; /* <-- default blue, change this to restyle */
-  color: #ffffff;
+  color: #fff;
 }
 
 .banner .banner-image {
@@ -42,11 +42,11 @@
   margin: 0;
   font-size: 2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #fff;
   text-shadow: 0 1px 3px rgb(0 0 0 / 30%);
 }
 
-@media (min-width: 900px) {
+@media (width >= 900px) {
   .banner .banner-wrapper {
     min-height: 320px;
   }
@@ -67,6 +67,6 @@
 }
 
 .banner.dark .banner-title h2 {
-  color: #ffffff;
+  color: #fff;
   text-shadow: 0 1px 4px rgb(0 0 0 / 50%);
 }

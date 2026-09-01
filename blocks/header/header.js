@@ -117,8 +117,8 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 export default async function decorate(block) {
   // load nav as fragment
   const navMeta = getMetadata('nav');
-   const currentLang = getLanguage();
-    const defaultNavPath = currentLang === 'fr' ? '/fr/nav' : '/nav';
+  const currentLang = getLanguage();
+  const defaultNavPath = currentLang === 'fr' ? '/content/fr/nav' : '/content/nav';
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : defaultNavPath;
   const fragment = await loadFragment(navPath);
 
@@ -155,15 +155,15 @@ export default async function decorate(block) {
     });
   }
 
-   // Initialize language switcher
-    const languageSwitcher = nav.querySelector('.nav-tools .default-content-wrapper > p');
-    if (languageSwitcher) {
-      languageSwitcher.style.cursor = 'pointer';
-      languageSwitcher.addEventListener('click', (e) => {
-        e.preventDefault();
-        switchLanguage();
-      });
-    }
+  // Initialize language switcher
+  const languageSwitcher = nav.querySelector('.nav-tools .default-content-wrapper > p');
+  if (languageSwitcher) {
+    languageSwitcher.style.cursor = 'pointer';
+    languageSwitcher.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchLanguage();
+    });
+  }
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
