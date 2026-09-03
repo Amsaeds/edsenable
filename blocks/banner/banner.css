@@ -1,5 +1,5 @@
 /* Banner block — default look is a blue background behind the image,
-   with the title centered on top in white text. */
+   with the title at the top-left in white text. */
 
 .banner {
   position: relative;
@@ -9,8 +9,8 @@
 .banner .banner-wrapper {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   min-height: 240px;
   background-color: #87ceeb; /* <-- default blue, change this to restyle */
   color: #fff;
@@ -34,7 +34,7 @@
 .banner .banner-title {
   position: relative;
   z-index: 1;
-  text-align: center;
+  text-align: left;
   padding: 24px;
 }
 
