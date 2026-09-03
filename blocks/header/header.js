@@ -118,7 +118,7 @@ export default async function decorate(block) {
   // load nav as fragment
   const navMeta = getMetadata('nav');
   const currentLang = getLanguage();
-  const defaultNavPath = currentLang === 'fr' ? '/content/fr/nav' : '/content/nav';
+  const defaultNavPath = currentLang === 'fr' ? '/fr/nav' : '/nav';
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : defaultNavPath;
   const fragment = await loadFragment(navPath);
 
