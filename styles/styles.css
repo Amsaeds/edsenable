@@ -326,11 +326,6 @@ main .section.highlight {
   padding: 40px 0;
 }
 
-a:hover {
-  color: red;
-}
-
-
 .section.grey-background {
   background-color: #6b7280;
 }
