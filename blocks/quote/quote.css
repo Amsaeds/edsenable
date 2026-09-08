@@ -1,0 +1,50 @@
+/* Quote block — a styled pull quote with an optional attribution line.
+   Uses the site's design tokens so it inherits the global theme. */
+
+.quote .quote-figure {
+  margin: 0;
+  padding: 24px 24px 24px 32px;
+  border-left: 4px solid var(--link-color);
+  background-color: var(--light-color);
+  border-radius: 4px;
+}
+
+.quote .quote-text {
+  margin: 0;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-s);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.quote .quote-text p {
+  margin: 0 0 0.5em;
+}
+
+.quote .quote-text p:last-child {
+  margin-bottom: 0;
+}
+
+.quote .quote-attribution {
+  margin-top: 16px;
+  color: var(--dark-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 500;
+  font-style: normal;
+}
+
+.quote .quote-attribution::before {
+  content: "— ";
+}
+
+@media (width >= 900px) {
+  .quote .quote-figure {
+    padding: 32px 32px 32px 40px;
+  }
+
+  .quote .quote-text {
+    font-size: var(--heading-font-size-m);
+  }
+}

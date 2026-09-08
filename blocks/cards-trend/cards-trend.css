@@ -1,0 +1,62 @@
+.cards-trend > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  gap: 24px;
+}
+
+.cards-trend > ul > li {
+  border: 1px solid #e8e8e8;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: var(--background-color);
+}
+
+.cards-trend .cards-trend-card-body {
+  margin: 16px;
+}
+
+.cards-trend .cards-trend-card-body .tag {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #999;
+}
+
+/* card title — dark, source size */
+.cards-trend .cards-trend-card-body h3 {
+  margin: 8px 0;
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.cards-trend .cards-trend-card-body h3 a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.cards-trend .cards-trend-card-body h3 a:hover {
+  text-decoration: underline;
+}
+
+/* card description — muted grey, source size */
+.cards-trend .cards-trend-card-body p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #666;
+}
+
+.cards-trend .cards-trend-card-image {
+  line-height: 0;
+}
+
+.cards-trend > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}

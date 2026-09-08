@@ -1,3 +1,5 @@
+@import url('brand.css'); /* wknd-trendsetters design tokens */
+
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -108,8 +110,10 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 700;
+  line-height: var(--heading-line-height);
+  letter-spacing: var(--heading-letter-spacing);
+  text-transform: uppercase;
   scroll-margin: 40px;
 }
 
@@ -180,10 +184,11 @@ button.button {
   max-width: 100%;
   margin: 0;
   border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
-  font: inherit;
-  font-weight: 500;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
   line-height: 1.25;
   text-decoration: none;
   cursor: pointer;
@@ -209,9 +214,9 @@ a.button.primary:hover,
 a.button.primary:focus-visible,
 button.button.primary:hover,
 button.button.primary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--light-color);
+  border-color: #333;
+  background-color: #333;
+  color: #fff;
 }
 
 a.button.primary[aria-disabled="true"],
@@ -228,7 +233,7 @@ button.button.primary:disabled:focus-visible {
 a.button.secondary,
 button.button.secondary {
   border-color: var(--text-color);
-  background-color: transparent;
+  background-color: var(--background-color);
   color: var(--text-color);
 }
 
@@ -236,9 +241,9 @@ a.button.secondary:hover,
 a.button.secondary:focus-visible,
 button.button.secondary:hover,
 button.button.secondary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--light-color);
-  color: var(--dark-color);
+  border-color: var(--text-color);
+  background-color: var(--text-color);
+  color: var(--background-color);
 }
 
 a.button.secondary[aria-disabled="true"],
@@ -317,11 +322,9 @@ main > .section:first-of-type {
   }
 }
 
-/* section metadata */
-main .section.light,
-main .section.highlight {
- background-color: cyan;
-  color: magenta;
+/* section background variants */
+main .section.light {
+  background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
 }

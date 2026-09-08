@@ -19,7 +19,6 @@ import { fetchPlaceholders } from './placeholders.js';
 const LANGUAGES = new Set(['en', 'fr']);
 let language;
 
-
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
     createHTML: (s) => s, // avoid stack overflow
@@ -122,7 +121,6 @@ export function getPlaceholdersPrefix() {
   return lang === 'en' ? 'default' : `/${lang}`;
 }
 
-
 function replacePlaceholderTokens(root, placeholders) {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   const textNodes = [];
@@ -144,7 +142,7 @@ function replacePlaceholderTokens(root, placeholders) {
  */
 function buildAutoBlocks(main) {
   try {
-   buildBreadcrumbBlock(main);
+    buildBreadcrumbBlock(main);
 
     // auto load `*/fragments/*` references
     const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')].filter((f) => !f.closest('.fragment'));
@@ -227,14 +225,14 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-document.documentElement.lang = getLanguage();
+  document.documentElement.lang = getLanguage();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
-     const placeholders = await fetchPlaceholders(getPlaceholdersPrefix());
-     console.log(placeholders);
-        replacePlaceholderTokens(main, placeholders);
+    const placeholders = await fetchPlaceholders(getPlaceholdersPrefix());
+    console.log(placeholders);
+    replacePlaceholderTokens(main, placeholders);
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
