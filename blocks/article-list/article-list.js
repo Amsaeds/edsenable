@@ -2,6 +2,7 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 
 const DEFAULT_INDEX = '/query-index.json';
 const PAGE_SIZE = 500; // query-index.json pages in chunks of up to 500 rows
+const BATCH_SIZE = 5; // number of cards shown per "Load more" click
 
 /**
  * Fetches every row of an AEM index sheet (e.g. query-index.json), paging
@@ -161,6 +162,50 @@ export default async function decorate(block) {
 
   const ul = document.createElement('ul');
   ul.className = 'article-list-grid';
-  entries.forEach((entry) => ul.append(buildCard(entry)));
   block.append(ul);
+
+
+  // An optional "Load more" batch size can be authored via the config,
+  // e.g. | Batch | 5 |. Defaults to BATCH_SIZE.
+  const batchSize = config.batch ? parseInt(config.batch, 10) : BATCH_SIZE;
+  let shown = 0;
+
+  const renderNextBatch = () => {
+    const next = entries.slice(shown, shown + batchSize);
+    next.forEach((entry) => ul.append(buildCard(entry)));
+    shown += next.length;
+  };
+
+  // reveal the first batch
+  renderNextBatch();
+
+  // only add the control if there are more entries to reveal
+  if (shown < entries.length) {
+    const actions = document.createElement('div');
+    actions.className = 'article-list-actions';
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'article-list-load-more button secondary';
+    button.textContent = 'Load more';
+
+    const updateButton = () => {
+      const remaining = entries.length - shown;
+      if (remaining <= 0) {
+        actions.remove();
+      } else {
+        button.textContent = `Load more (${remaining})`;
+      }
+    };
+    updateButton();
+
+    button.addEventListener('click', () => {
+      renderNextBatch();
+      updateButton();
+    });
+
+    actions.append(button);
+    block.append(actions);
+  }
+
 }

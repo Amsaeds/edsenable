@@ -10,12 +10,14 @@
   min-height: 12rem;
 }
 
-/* named article-list-grid (not article-list) so this never collides with the
-   block wrapper's own class and gets overridden by a generic .block rule */
+/* Editorial / classic design — no boxed cards or shadows. Each article
+   is separated by a thin top rule, with refined typography and generous
+   whitespace. Named article-list-grid (not article-list) so it never
+   collides with the block wrapper's own class. */
 .article-list-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 3rem 2.5rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -23,30 +25,32 @@
 }
 
 .article-list-grid .article-list-card {
-  border: 1px solid var(--border-color, #e4e4e4);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.article-list-card:hover,
-.article-list-card:focus-within {
-  box-shadow: 0 6px 20px rgb(0 0 0 / 8%);
-  transform: translateY(-2px);
+  position: relative;
+  display: flex;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--text-color);
+  background: none;
 }
 
 .article-list-card a {
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100%;
   color: inherit;
   text-decoration: none;
 }
 
+.article-list-card a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
 .article-list-card-image {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 2;
+  margin-bottom: 1.25rem;
   overflow: hidden;
-  background: var(--light-color, #f4f4f4);
+  background: var(--light-color);
 }
 
 .article-list-card-image img {
@@ -54,44 +58,96 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  filter: grayscale(15%);
+  transition: filter 0.4s ease;
+}
+
+.article-list-card:hover .article-list-card-image img {
+  filter: grayscale(0%);
 }
 
 .article-list-card-body {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem 1.25rem 1.5rem;
+  gap: 0.6rem;
+}
+
+/* the date reads as a small uppercase kicker above the headline */
+.article-list-card-date {
+  order: -1;
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dark-color);
 }
 
 .article-list-card-body h3 {
   margin: 0;
-  font-size: 1.1rem;
-  line-height: 1.3;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+.article-list-card a:hover h3 {
+  color: var(--link-color);
 }
 
 .article-list-card-body p {
   margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--text-color-secondary, #666);
-}
-
-.article-list-card-date {
-  margin-top: auto;
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-color-tertiary, #999);
+  font-size: var(--body-font-size-xs);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--dark-color);
 }
 
 .article-list-empty {
-  color: var(--text-color-secondary, #666);
+  color: var(--dark-color);
   font-style: italic;
+}
+
+/* "Load more" reads as an understated, centered text link with a rule */
+.article-list-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 3.5rem;
+}
+
+.article-list-load-more.button {
+  min-width: 0;
+  padding: 0.4em 0;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid var(--text-color);
+  background: none;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.article-list-load-more.button:hover,
+.article-list-load-more.button:focus-visible {
+  border-color: var(--link-color);
+  background: none;
+  color: var(--link-color);
+}
+
+@media (width >= 900px) {
+  .article-list-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
 }
 
 @media (width <= 600px) {
   .article-list-grid {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 }
