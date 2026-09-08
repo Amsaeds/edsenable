@@ -35,3 +35,18 @@
     padding: 40px 32px;
   }
 }
+
+/* video-background variant — a muted, looping video sits behind the
+   hero content, mirroring the default image background. */
+.hero.video-background {
+  overflow: hidden;
+}
+
+.hero.video-background .hero-video {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
