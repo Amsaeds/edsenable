@@ -1,0 +1,94 @@
+/* hero-light — light-background intro hero (text + CTAs beside an image stack).
+   Migrated from wknd-trendsetters.site landing hero. */
+
+.hero-light-container .hero-light-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-light {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.hero-light h1,
+.hero-light h2,
+.hero-light h3,
+.hero-light h4,
+.hero-light h5,
+.hero-light h6 {
+  margin: 0 0 16px;
+  color: var(--text-color);
+}
+
+.hero-light h1 {
+  font-size: 56px;
+  line-height: 1.05;
+  letter-spacing: var(--heading-letter-spacing);
+  text-transform: uppercase;
+}
+
+.hero-light p {
+  margin: 0 0 16px;
+  color: var(--text-color);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* CTA links render as pill buttons to match source */
+.hero-light a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 12px 0 0;
+  border: 2px solid var(--text-color);
+  border-radius: 9999px;
+  padding: 12px 24px;
+  background: var(--text-color);
+  color: var(--background-color);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.hero-light a:any-link:hover {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+/* last CTA (final paragraph) = outline variant */
+/* stylelint-disable no-descending-specificity */
+.hero-light p:last-of-type a:any-link {
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.hero-light p:last-of-type a:any-link:hover {
+  background: var(--text-color);
+  color: var(--background-color);
+}
+/* stylelint-enable no-descending-specificity */
+
+/* image stack */
+.hero-light picture {
+  display: block;
+}
+
+.hero-light img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+@media (width >= 900px) {
+  .hero-light {
+    grid-template-columns: 1fr 1fr;
+    padding: 80px 32px;
+  }
+}

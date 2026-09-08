@@ -1,0 +1,42 @@
+{
+  "variantName": "hero-light",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-08-27T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd-trendsetters.site/",
+    "originPage": "landing-page (WKND Trendsetters home)",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "landing-hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "heading + subheading + 2 CTAs + images",
+    "buttonCount": 2,
+    "imageCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "landing page top-of-page hero on light background",
+      "marketing intro with headline, subheading and CTAs alongside imagery"
+    ],
+    "notSuitableFor": [
+      "dark full-bleed overlay heroes (use hero-overlay)",
+      "text-only heroes without imagery"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/index",
+      "/blog",
+      "/faq",
+      "/fashion-trends-young-adults-casual-sport"
+    ],
+    "reuseCount": 4,
+    "lastUsed": "2026-08-27T06:29:22.628560Z"
+  }
+}

@@ -164,6 +164,7 @@ export default async function decorate(block) {
   ul.className = 'article-list-grid';
   block.append(ul);
 
+
   // An optional "Load more" batch size can be authored via the config,
   // e.g. | Batch | 5 |. Defaults to BATCH_SIZE.
   const batchSize = config.batch ? parseInt(config.batch, 10) : BATCH_SIZE;
@@ -206,4 +207,5 @@ export default async function decorate(block) {
     actions.append(button);
     block.append(actions);
   }
+
 }

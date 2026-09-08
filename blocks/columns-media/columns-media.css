@@ -1,0 +1,59 @@
+.columns-media > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-media img {
+  width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+/* CTA in the text column = the link in the LAST paragraph (e.g. "Read the full
+   article" / "Explore the blog"). Renders as a pill button. Scoped to the last
+   <p> so inline breadcrumb links (first <p>) are unaffected. */
+.columns-media > div > div > p:last-child > a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  border: 2px solid var(--text-color);
+  border-radius: 9999px;
+  padding: 12px 24px;
+  background: var(--text-color);
+  color: var(--background-color);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.columns-media > div > div > p:last-child > a:any-link:hover {
+  background: #333;
+  border-color: #333;
+}
+
+.columns-media > div > div {
+  order: 1;
+}
+
+.columns-media > div > .columns-media-img-col {
+  order: 0;
+}
+
+.columns-media > div > .columns-media-img-col img {
+  display: block;
+}
+
+@media (width >= 900px) {
+  .columns-media > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 24px;
+  }
+
+  .columns-media > div > div {
+    flex: 1;
+    order: unset;
+  }
+}
