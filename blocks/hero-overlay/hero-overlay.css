@@ -1,0 +1,86 @@
+/* Hero (overlay) — dark, full-bleed CTA hero with the image tinted into
+   a black panel and white text/CTA overlaid. Matches the source:
+   black background, Syncopate display heading, white pill CTA. */
+
+.hero-overlay.block {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 420px;
+  padding: 64px 24px;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+.hero-overlay .hero-overlay-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-overlay .hero-overlay-bg picture,
+.hero-overlay .hero-overlay-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.55; /* let the black background tint the image */
+}
+
+.hero-overlay .hero-overlay-content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.hero-overlay .hero-overlay-content h1,
+.hero-overlay .hero-overlay-content h2 {
+  margin: 0;
+  font-family: var(--display-font-family);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.hero-overlay .hero-overlay-content p {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+  line-height: 1.6;
+  color: #fff;
+}
+
+.hero-overlay .hero-overlay-content .button-wrapper {
+  margin: 0.5rem 0 0;
+}
+
+/* white pill CTA on the dark panel */
+.hero-overlay .hero-overlay-content a.button {
+  border-color: #fff;
+  background-color: #fff;
+  color: #000;
+}
+
+.hero-overlay .hero-overlay-content a.button:hover,
+.hero-overlay .hero-overlay-content a.button:focus-visible {
+  border-color: #fff;
+  background-color: transparent;
+  color: #fff;
+}
+
+@media (width >= 900px) {
+  .hero-overlay.block {
+    min-height: 520px;
+    padding: 128px 64px;
+  }
+
+  .hero-overlay .hero-overlay-content h1,
+  .hero-overlay .hero-overlay-content h2 {
+    font-size: 3.25rem;
+  }
+}
