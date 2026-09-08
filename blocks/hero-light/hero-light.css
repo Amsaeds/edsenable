@@ -1,94 +1,86 @@
-/* hero-light — light-background intro hero (text + CTAs beside an image stack).
-   Migrated from wknd-trendsetters.site landing hero. */
+/* Hero (light) — light banner, text column beside an image cluster.
+   Matches the source: #f5f5f5 background, Syncopate display heading,
+   pill CTAs. Mobile-first: stacked, then side-by-side at 900px. */
 
-.hero-light-container .hero-light-wrapper {
-  max-width: unset;
-  padding: 0;
-}
-
-.hero-light {
+.hero-light.block {
   display: grid;
-  gap: 32px;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  gap: 2rem;
   padding: 40px 24px;
+  background-color: #f5f5f5;
+  color: #000;
 }
 
-.hero-light h1,
-.hero-light h2,
-.hero-light h3,
-.hero-light h4,
-.hero-light h5,
-.hero-light h6 {
-  margin: 0 0 16px;
-  color: var(--text-color);
-}
-
-.hero-light h1 {
-  font-size: 56px;
-  line-height: 1.05;
-  letter-spacing: var(--heading-letter-spacing);
-  text-transform: uppercase;
-}
-
-.hero-light p {
-  margin: 0 0 16px;
-  color: var(--text-color);
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-/* CTA links render as pill buttons to match source */
-.hero-light a:any-link {
-  display: inline-flex;
-  align-items: center;
+.hero-light .hero-light-content {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin: 8px 12px 0 0;
-  border: 2px solid var(--text-color);
-  border-radius: 9999px;
-  padding: 12px 24px;
-  background: var(--text-color);
-  color: var(--background-color);
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  gap: 1rem;
 }
 
-.hero-light a:any-link:hover {
-  background: #333;
-  border-color: #333;
-  color: #fff;
+.hero-light .hero-light-content h1 {
+  margin: 0;
+  font-family: var(--display-font-family);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #000;
 }
 
-/* last CTA (final paragraph) = outline variant */
-/* stylelint-disable no-descending-specificity */
-.hero-light p:last-of-type a:any-link {
-  background: var(--background-color);
-  color: var(--text-color);
+.hero-light .hero-light-content p {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
 }
 
-.hero-light p:last-of-type a:any-link:hover {
-  background: var(--text-color);
-  color: var(--background-color);
+.hero-light .hero-light-content .button-wrapper {
+  display: inline-block;
+  margin: 0;
 }
-/* stylelint-enable no-descending-specificity */
 
-/* image stack */
-.hero-light picture {
+/* place the two CTAs on one row */
+.hero-light .hero-light-content .button-wrapper + .button-wrapper {
+  margin-left: 0.75rem;
+}
+
+.hero-light .hero-light-media {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.hero-light .hero-light-media picture {
   display: block;
 }
 
-.hero-light img {
+.hero-light .hero-light-media picture img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
   border-radius: 12px;
+  display: block;
 }
 
 @media (width >= 900px) {
-  .hero-light {
+  .hero-light.block {
     grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
     padding: 80px 32px;
+  }
+
+  /* text column first, media second */
+  .hero-light .hero-light-content {
+    order: 0;
+  }
+
+  .hero-light .hero-light-media {
+    order: 1;
+    gap: 1.5rem;
+  }
+
+  .hero-light .hero-light-content h1 {
+    font-size: 2.75rem;
   }
 }
